@@ -44,7 +44,9 @@ This thing is good, but slightly on the costly side. A solid 3/5.
   
 ## Number 2. KFC Sandwich
 KFC’s chicken breast—with its inferior breading and relative lack of 
-crunch—is what holds this sandwich back.
+crunch—is what holds this sandwich back. It's delectable sauce is what 
+pulls it through to the second spot on this. Colonel Sanders would be proud.
+This thing is a solid 4/5!! 
 
 <p align="center">
   <img src="images/kfc.png" alt="kfc sandwich" width="200" height="200">
