@@ -3,4 +3,21 @@
 ### Added a cat picture for fun
 I have never owned a cat!
 
-![cat](https://user-images.githubusercontent.com/122233079/215626927-a857f9a0-64cb-48d0-91bd-46868d601dc6.png)
+
+<img src="cat.png" alt="cat image" width="100" height="100">
+
+<img src="https://media.giphy.com/media/qLHzYjlA2FW8g/giphy.gif" />
+
+### Lists of animals (in no particular order):
+1. Cats
+2. Dogs
+3. Fish
+
+<kbd> alt + f4 </kbd>
+
+$$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+$$
+
+
+
