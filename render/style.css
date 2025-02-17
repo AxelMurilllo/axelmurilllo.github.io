@@ -1,0 +1,195 @@
+body {
+    background-image: url('/images/bliss.jpg');
+    font-family: 'kosugi maru';
+    color: white;
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 900px;
+    height: auto;
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+    flex-wrap: nowrap; /* Keeps elements aligned */
+}
+
+aside {
+    width: 220px;
+    flex-shrink: 0; /* Prevents resizing */
+}
+
+main {
+    flex-grow: 1;
+    min-width: 350px;
+}
+
+.box {
+    border: 4px ridge #679aab; /* Keeps the raised effect */
+    background: rgba(255, 255, 255, 0.1);
+    margin: 5px;
+    min-width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    background-image: url('https://media.istockphoto.com/id/932132812/vector/vector-gingham-striped-checkered-blanket-tablecloth-seamless-white-blue-table-cloth-napkin.jpg?s=612x612&w=0&k=20&c=ySsCuFpC3IqOEk72W1RcoV_GffFBPjWff8b-xX1hMpQ='); /* Restores gingham */
+    background-size: 50%;
+}
+
+.content {
+    background-color: white;
+    background-image: url('/images/background-pattern.PNG');
+    background-repeat: repeat;
+    background-size: 20%;
+    border: 1px solid #030429;
+    color: #030429;
+    padding: 5px;
+    text-align: center;
+}
+
+button {
+    background: linear-gradient(95deg, #cfe4f5, #21677e);
+    border: 2px solid white;
+    padding: 6px 10px;
+    font-size: 17px;
+    color: white;
+    text-shadow: 1px 1px 0px black;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* 🔹 Navigation Links */
+
+.nav {
+    line-height: 1.5;
+    text-align: left;
+}
+
+.nav a, .nav a:visited {
+    padding-left: 5px;
+    width: 150px;
+    height: 27px;
+    font-weight: bold;
+    background: linear-gradient(89deg, #679aab, transparent);
+    border: 1px solid black;
+    border-radius: 4px;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+    display: inline-block;
+    color: white;
+    text-align: left;
+    margin: 5px;
+    transition: letter-spacing 0.5s ease, font-style 0.5s ease;
+}
+
+/* .nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease, left 0.3s ease;
+} */
+
+.nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+
+.nav a:hover {
+    color:#030429;
+    text-shadow: 1px 1px 0px #ffffff, -1px -1px 0px #ffffff, 1px -1px 0px #ffffff, -1px 1px 0px #ffffff;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    letter-spacing: 1.25px;
+    font-style: italic;
+}
+
+.nav button, .upd button {
+    background-color: lightblue;
+    border: 1px solid #030429;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+    color: white;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 17px;
+    width: 100%;
+    cursor:default;
+}
+
+.nav button:hover, .upd button:hover {
+    background-color: #679aab;
+}
+
+/* 🔹 Fixing Header & Title */
+.header {
+    height: 100px;
+    background-size: cover;
+    border: ridge #679aab;
+    position: relative;
+}
+
+.ht {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'ms ui gothic';
+    text-shadow: -2px 0 #3134aa, 0 1px #383738, 2px 0 #3134aa, 0 -1px #383738, 0 0 4px #3134aa;
+}
+
+/* 🔹 Scrollable Elements */
+.scroll {
+    overflow: auto;
+    max-height: 150px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Mobile View Fix */
+@media screen and (max-width: 768px) {
+    #flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    aside, main {
+        width: 100%;
+        max-width: none;
+    }
+
+    .box {
+        width: 100%;
+    }
+}
