@@ -1,74 +1,108 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./render/style.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-    <!-- TODO: change tab icon -->
-    <link rel="icon" type="image/x-icon" href="https://00s.neocities.org/images/favicon.ico">
-    <title>Axel's Site</title>
-</head>
-  <body>
-    <div class="wrapper">
-      <div id="flex">
-        <aside class="left">
-          <div class="nav">
-            <div class="box" style="border-radius: 10px 0px 0px 10px;">
-              <div class="content scroll" style="max-height: 550px;">
-                <button>NAVIGATION</button>
-                <br>
-                <!-- TODO: FIX PAGE LINKS -->
-                <a>about</a>
-                </div>
-              </div>
-            </div>
-        </aside>
-        <main>
-          <div>
-            <div class="header">
-              <div class="ht">axel murillo's website</div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="content">
-              <div class="" style="text-align: center; margin-top: 5px; padding: 3px;">
-                <h3 style="font-size: 35px; line-height: 1px;">WELCOME! </h3>
-                <p>i love coding</p>
-              </div>
-            </div>
-          </div>
-        </main>
-        <aside class="right">
-          <div class="box" style="border-radius: 0px 10px 0px 0px;">
-            <div class="content">
-              <div class="upd">
-                <button>UPDATES</button>
-              </div>
-              <div class="scroll" style="height: 150px;">
-              <p>
-              <strong>01/27/2025</strong> creation of site
-              </p>
-              </div>
-            </div>
-          </div>
-          <div class="box" style="border-radius: 0px 0px 10px 0px;">
-            <div class="content">
-              <div class="nav">
-                <button>TO DO LIST</button>
-              </div>
-              <div class="scroll" style="height: 100px; line-height: 1;">
-                <div class="bot">
-                  <p><strong>workout!</strong></p>
-                  <p><strong>code!!!</strong></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
+<html lang="en">
 
-  </body>
+<head id="dynamic-head"></head>
+<script>
+  fetch("head.html")
+    .then(response => response.text())
+    .then(data => document.getElementById("dynamic-head").innerHTML = data);
+</script>
+
+<body>
+  <div class="wrapper">
+    <div id="flex">
+      <aside class="left">
+        <div class="nav">
+          <div class="box" style="border-radius: 10px 0px 0px 10px;">
+            <div class="content scroll" style="max-height: 550px;">
+              <button>NAVIGATION</button>
+              <br>
+              <!-- TODO: FIX PAGE LINKS -->
+              <a>about</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <div>
+          <div class="header">
+            <div class="ht">axel murillo's website</div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="content" style="text-align: center; margin-top: 5px; padding: 3px;">
+            <h3 style="font-size: 35px; line-height: 1px;">WELCOME! </h3>
+            <p>i love coding</p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="content">
+            <h3 style="text-align: center;">Projects</h3>
+            <div class="projects-grid">
+              <div class="project">
+                <a href="projects/project1.html">
+                  <img src="images/project1.png" alt="Project 1" class="project-img">
+                  <p>Project 1</p>
+                </a>
+              </div>
+              <!-- <div class="project">
+                <a href="projects/project2.html">
+                  <img src="images/project2.png" alt="Project 2" class="project-img">
+                  <p>Project 2</p>
+                </a>
+              </div>
+              <div class="project">
+                <a href="projects/project3.html">
+                  <img src="images/project3.png" alt="Project 3" class="project-img">
+                  <p>Project 3</p>
+                </a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+
+      </main>
+      <aside class="right">
+        <div class="box" style="border-radius: 0px 10px 0px 0px;">
+          <div class="content">
+            <div class="upd">
+              <button>UPDATES</button>
+            </div>
+            <div class="scroll" style="height: 150px;">
+              <p><strong>01/27/2025</strong> Creation of site</p>
+              <p><strong>01/28/2025</strong> Added basic homepage layout</p>
+              <p><strong>01/30/2025</strong> Styled navigation sidebar and buttons</p>
+              <p><strong>02/01/2025</strong> Integrated Google Fonts (Kosugi Maru)</p>
+              <p><strong>02/02/2025</strong> Added project showcase section</p>
+              <p><strong>02/03/2025</strong> Created template for project pages</p>
+              <p><strong>02/05/2025</strong> Fixed navigation links and styling issues</p>
+              <p><strong>02/07/2025</strong> Uploaded first project images</p>
+              <p><strong>02/10/2025</strong> Hosting site on GitHub Pages</p>
+            </div>
+          </div>
+        </div>
+        <div class="box" style="border-radius: 0px 0px 10px 0px;">
+          <div class="content">
+            <div class="nav">
+              <button>TO DO LIST</button>
+            </div>
+            <div class="scroll" style="height: 100px; line-height: 1;">
+              <div class="bot">
+                <p><strong>Work on updating Clashbrain</strong></p>
+                <p><strong>Research new features for Clashbrain</strong></p>
+                <p><strong>Improve portfolio styling & responsiveness</strong></p>
+                <p><strong>Add a section to showcase open-source contributions</strong></p>
+                <p><strong>Learn more about React Konva for interactive UI elements</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+</body>
+
 </html>
