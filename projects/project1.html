@@ -3,7 +3,7 @@
 
 <head id="dynamic-head"></head>
 <script>
-    fetch("head.html")
+    fetch("includes/head.html")
         .then(response => response.text())
         .then(data => document.getElementById("dynamic-head").innerHTML = data);
 </script>

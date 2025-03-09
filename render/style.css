@@ -152,8 +152,9 @@ button {
     position: relative;
     /* BACKGROUND IMAGE STUFF */
     image-rendering: auto;
-    background-image: ;
+    background-image: url("../images/bsu-campus-banner.png");
     background-size: 100%;
+    background-position: center;
 }
 
 .ht {
@@ -190,14 +191,7 @@ button {
 .project {
     text-align: center;
     max-width: 200px;
-}
-
-.project-img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
+    text-decoration: none;
 }
 
 .project-img:hover {
@@ -207,6 +201,36 @@ button {
 .project p {
     font-size: 16px;
     margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.project a {
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+.project-item {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 10px; 
+    text-decoration: none;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.project-img {
+    width: 50px; /* Adjust image size */
+    height: auto;
+    border-radius: 5px;
 }
 
 

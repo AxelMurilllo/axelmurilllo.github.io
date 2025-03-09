@@ -3,7 +3,7 @@
 
 <head id="dynamic-head"></head>
 <script>
-  fetch("head.html")
+  fetch("includes/head.html")
     .then(response => response.text())
     .then(data => document.getElementById("dynamic-head").innerHTML = data);
 </script>
@@ -18,7 +18,11 @@
               <button>NAVIGATION</button>
               <br>
               <!-- TODO: FIX PAGE LINKS -->
-              <a>about</a>
+              <a href="about.html">about</a>
+              <a>projects</a>
+              <a>blog</a>
+              <a>fun</a>
+              <a>contact</a>
             </div>
           </div>
         </div>
@@ -32,19 +36,21 @@
         <div class="box">
           <div class="content" style="text-align: center; margin-top: 5px; padding: 3px;">
             <h3 style="font-size: 35px; line-height: 1px;">WELCOME! </h3>
-            <p>i love coding</p>
+            <p>Hi, I’m Axel— a software developer dedicated to building tools, optimizing code, and 
+              creating projects that are either useful or at least interesting to look at. 
+              I enjoy learning different technologies and figuring out how I could use them in projects.</p>
+            <p>Currently, I’m working on <strong>Clashbrain</strong>, alongside other personal and open-source projects like PTCG-sim.</p>
           </div>
         </div>
-
         <div class="box">
           <div class="content">
-            <h3 style="text-align: center;">Projects</h3>
+            <h3 style="text-align: center; font-size: 25px;">PROJECTS</h3>
             <div class="projects-grid">
               <div class="project">
-                <a href="projects/project1.html">
-                  <img src="images/project1.png" alt="Project 1" class="project-img">
-                  <p>Project 1</p>
-                </a>
+                <a href="projects/project1.html" class="project-item">
+                  <img src="images/project-images/marginlia-magic.PNG" alt="Marginalia Magic" class="project-img">
+                  <p class="project-text">Marginalia Magic</p>
+                </a>                
               </div>
               <!-- <div class="project">
                 <a href="projects/project2.html">
@@ -71,15 +77,16 @@
               <button>UPDATES</button>
             </div>
             <div class="scroll" style="height: 150px;">
-              <p><strong>01/27/2025</strong> Creation of site</p>
-              <p><strong>01/28/2025</strong> Added basic homepage layout</p>
-              <p><strong>01/30/2025</strong> Styled navigation sidebar and buttons</p>
-              <p><strong>02/01/2025</strong> Integrated Google Fonts (Kosugi Maru)</p>
-              <p><strong>02/02/2025</strong> Added project showcase section</p>
-              <p><strong>02/03/2025</strong> Created template for project pages</p>
-              <p><strong>02/05/2025</strong> Fixed navigation links and styling issues</p>
-              <p><strong>02/07/2025</strong> Uploaded first project images</p>
+              <p><strong>03/08/2025</strong> Updated Projects Section, Adding icon</p>
               <p><strong>02/10/2025</strong> Hosting site on GitHub Pages</p>
+              <p><strong>02/07/2025</strong> Uploaded first project images</p>
+              <p><strong>02/05/2025</strong> Fixed navigation links and styling issues</p>
+              <p><strong>02/03/2025</strong> Created template for project pages</p>
+              <p><strong>02/02/2025</strong> Added project showcase section</p>
+              <p><strong>02/01/2025</strong> Integrated Google Fonts (Kosugi Maru)</p>
+              <p><strong>01/30/2025</strong> Styled navigation sidebar and buttons</p>
+              <p><strong>01/28/2025</strong> Added basic homepage layout</p>
+              <p><strong>01/27/2025</strong> Creation of site</p>
             </div>
           </div>
         </div>
