@@ -102,17 +102,6 @@ button {
     transition: letter-spacing 0.5s ease, font-style 0.5s ease;
 }
 
-/* .nav a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 5px;
-    width: 0%;
-    height: 2px;
-    background-color: white;
-    transition: width 0.3s ease, left 0.3s ease;
-} */
-
 .nav a:hover::after {
     width: 100%;
     left: 0;
@@ -233,6 +222,58 @@ button {
     border-radius: 5px;
 }
 
+/* Technologies Section */
+
+.tech-box {
+    background: rgb(212, 208, 200); /* Windows XP default gray */
+    border: 2px solid black;
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+}
+
+.tech-header {
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.tech-icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.tech-name {
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tech-desc {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.692);
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
 
 
 /* Mobile View Fix */
