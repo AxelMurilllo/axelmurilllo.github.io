@@ -222,41 +222,100 @@ button {
     border-radius: 5px;
 }
 
-/* Technologies Section */
+/* TECHNOLOGIES SECTION */
 
-.tech-box {
-    background: rgb(212, 208, 200); /* Windows XP default gray */
-    border: 2px solid black;
-    padding: 10px;
-    width: 90%;
-    margin: auto;
+/* Main Control Panel Box */
+.control-panel {
+    background: #ece9d8;
+    border: 2px solid #808080;
+    padding: 5px;
+    font-family: "Tahoma", sans-serif;
+    width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
-.tech-header {
-    font-family: "Trebuchet MS", Tahoma, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
+/* Address Bar */
+.address-bar {
+    background: linear-gradient(to bottom, #ece9d8, #d4d0c8);
+    border: 2px inset #808080;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.address-input {
+    flex-grow: 1;
+    border: 1px inset #808080;
+    background-color: white;
+    padding: 2px 5px;
+    font-family: "Tahoma", sans-serif;
+    font-size: 12px;
+}
+
+.back-btn, .go-btn {
+    border: 1px outset #808080;
+    background: #ece9d8;
+    padding: 2px 5px;
+    cursor: pointer;
+    font-size: 12px;
     color: black;
-    text-align: center;
-    padding-bottom: 5px;
+    user-select: none;
 }
 
+.back-btn:active, .go-btn:active {
+    border: 1px inset #808080;
+}
+
+.back-icon {
+    width: 15px;
+    height: 15px;
+    image-rendering: pixelated;
+}
+
+/* Toolbar */
+.toolbar {
+    background: #ece9d8;
+    border-bottom: 2px solid #808080;
+    padding: 3px;
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.toolbar-item {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    user-select: none;
+}
+
+.toolbar-item:hover {
+    background-color: #808080;
+}
+
+/* Grid Layout */
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px;
-    justify-content: center;
-    text-align: center;
     padding: 10px;
+    text-align: center;
+    background-color: white;
 }
 
+/* Individual Icons */
 .tech-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    font-size: 12px;
 }
 
+/* Icons */
 .tech-icon {
     width: 32px;
     height: 32px;
@@ -264,16 +323,22 @@ button {
 }
 
 .tech-name {
-    font-family: "Trebuchet MS", Tahoma, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    color: black;
 }
 
-.tech-desc {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.692);
-    font-family: "Trebuchet MS", Tahoma, sans-serif;
+.tech-description {
+    color: #808080;
+    margin: 0%;
 }
+
+/* Status Bar */
+.status-bar {
+    background: #d4d0c8;
+    border-top: 2px solid #808080;
+    padding: 4px;
+    font-size: 12px;
+}
+
 
 
 /* Mobile View Fix */
