@@ -329,6 +329,7 @@ button {
 .tech-description {
     color: #808080;
     margin: 0%;
+    font-size: 9px;
 }
 
 /* Status Bar */
