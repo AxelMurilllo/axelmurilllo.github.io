@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="dynamic-head">
+    <link href="../../render/projects_styles.css" rel="stylesheet" type="text/css" media="all">
+    <script src="../../scripts/desktop.js" defer></script>
+</head>
+<script>
+    fetch("../../includes/head.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("dynamic-head").innerHTML += data;
+        });
+</script>
+
+<body>
+    <div class="wrapper">
+        <div id="flex">
+            <aside class="left">
+                <div class="nav">
+                    <div class="box" style="border-radius: 10px 0px 0px 10px;">
+                        <div class="content scroll" style="max-height: 550px;">
+                            <!-- Navigation Sidebar -->
+                            <button>NAVIGATION</button>
+                            <br>
+                            <a href="../../index.html">home</a>
+                            <a href="../about.html">about</a>
+                            <a href="projects.html">projects</a>
+                            <a href="../blog.html">blog</a>
+                            <a href="../fun.html">fun</a>
+                            <a href="../contact.html">contact</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="desktop-grid" id="desktop">
+                    <!-- desktop.js will position the icons -->
+                    <div class="desktop-icon" data-id="marginalia" style="left: 0px; top: 0px;">
+                        <img src="../../images/project-images/marginlia-magic.PNG" alt="Marginalia Magic" class="icon-img">
+                        <div class="icon-text">Marginalia Magic</div>
+                    </div>
+
+                    <div class="desktop-icon" data-id="clashbrain" style="left: 110px; top: 0px;">
+                        <img src="../../images/project-images/clashbrain.png" alt="Clashbrain" class="icon-img">
+                        <div class="icon-text">Clashbrain</div>
+                    </div>
+
+                    <div class="desktop-icon" data-id="ptcg" style="left: 220px; top: 0px;">
+                        <img src="../../images/project-images/ptcg-sim.png" alt="PTCG Simulator" class="icon-img">
+                        <div class="icon-text">PTCG Simulator</div>
+                    </div>
+                </div>
+
+                <!-- Project Windows -->
+                <div id="marginalia-window" class="project-window" style="top: 50px; left: 50px;">
+                    <div class="window-titlebar">
+                        <span>Marginalia Magic</span>
+                        <div class="window-buttons">
+                            <div class="window-button">_</div>
+                            <div class="window-button">□</div>
+                            <div class="window-button">×</div>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="project-details">
+                            <img src="../../images/project-images/marginlia-magic.PNG" alt="Marginalia Magic" class="project-preview">
+                            <div class="project-info">
+                                <div class="project-title">Marginalia Magic</div>
+                                <div class="project-description">A web application for adding and managing annotations in digital texts.</div>
+                                <div class="project-tech">Technologies: React • Node.js • MongoDB</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="window-status">Ready</div>
+                    <div class="resize-handle bottom-right"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

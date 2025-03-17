@@ -3,7 +3,7 @@
 
 <head id="dynamic-head"></head>
 <script>
-  fetch("includes/head.html")
+  fetch("/includes/head.html")
     .then(response => response.text())
     .then(data => document.getElementById("dynamic-head").innerHTML = data);
 </script>
@@ -19,11 +19,11 @@
               <button>NAVIGATION</button>
               <br>
               <!-- TODO: FIX PAGE LINKS -->
-              <a href="about.html">about</a>
-              <a>projects</a>
-              <a>blog</a>
-              <a>fun</a>
-              <a>contact</a>
+              <a href="pages/about.html">about</a>
+              <a href="pages/projects/projects.html">projects</a>
+              <a href="page/blog.html">blog</a>
+              <a href="pages/fun.html">fun</a>
+              <a href="pages/contact.html">contact</a>
             </div>
           </div>
         </div>
@@ -135,6 +135,8 @@
               <button>UPDATES</button>
             </div>
             <div class="scroll" style="height: 150px;">
+              <p><strong>03/10/2025</strong> Creating other pages</p>
+              <p><strong>03/09/2025</strong> Finished Current Technologies section</p>
               <p><strong>03/08/2025</strong> Updated Projects Section, Adding icon</p>
               <p><strong>02/10/2025</strong> Hosting site on GitHub Pages</p>
               <p><strong>02/07/2025</strong> Uploaded first project images</p>
