@@ -246,33 +246,71 @@ main {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .project-preview {
     width: 200px;
     max-width: 100%;
     height: auto;
+    object-fit: contain;
+    align-self: flex-start;
 }
 
 .project-info {
     flex: 1;
     min-width: 200px;
+    color: #000;
 }
 
 .project-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #0A246A;
 }
 
 .project-description {
     font-size: 14px;
     margin-bottom: 15px;
+    color: #333;
+}
+
+.project-description h3 {
+    color: #0A246A;
+    font-size: 16px;
+    margin: 15px 0 8px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.project-description h3:first-child {
+    margin-top: 0;
+}
+
+.project-description p {
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    color: #333;
+}
+
+.project-description ul {
+    margin: 8px 0;
+    padding-left: 20px;
+    color: #333;
+}
+
+.project-description li {
+    margin-bottom: 4px;
+    line-height: 1.4;
 }
 
 .project-tech {
     font-size: 12px;
     color: #666;
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    padding-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Navigation styling */
@@ -316,6 +354,28 @@ main {
     letter-spacing: 1.25px;
 }
 
+/* Instruction box styles */
+.instruction-text {
+    text-align: left;
+    color: #030429;
+    font-size: 13px;
+    line-height: 1.4;
+    padding: 5px;
+}
+
+.instruction-text p {
+    margin: 0 0 10px 0;
+}
+
+.instruction-text ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.instruction-text li {
+    margin-bottom: 5px;
+}
+
 /* Desktop background styles */
 .desktop-grid::before {
     content: '';
@@ -326,4 +386,195 @@ main {
     bottom: 0;
     background: rgba(0, 0, 0, 0.1);
     pointer-events: none;
+}
+
+/* Screenshot viewer styles */
+.screenshot-viewer {
+    margin: 15px 0;
+    border: 2px solid #919B9C;
+    background: #ECE9D8;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.screenshot-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.tab-button {
+    padding: 4px 12px;
+    background: linear-gradient(to bottom, #FEFEFE, #E3E3E3);
+    border: 1px solid #919B9C;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Tahoma', sans-serif;
+    color: #000;
+}
+
+.tab-button.active {
+    background: linear-gradient(to bottom, #0A246A, #A6CAF0);
+    color: white;
+    border-color: #0A246A;
+}
+
+.screenshot-container {
+    border: 1px solid #919B9C;
+    background: white;
+    padding: 10px;
+}
+
+.screenshot-frame {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background: #F0F0F0;
+    border: 1px inset #919B9C;
+}
+
+.screenshot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+    padding: 5px;
+}
+
+.screenshot.active {
+    display: block;
+}
+
+.screenshot-description {
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+    margin-top: 8px;
+    font-family: 'Tahoma', sans-serif;
+    padding: 4px;
+    background: #F0F0F0;
+    border: 1px solid #DDD;
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.lightbox.active {
+    display: block;
+}
+
+.lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ECE9D8;
+    border: 3px solid #0055EA;
+    border-radius: 7px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.lightbox-header {
+    background: linear-gradient(to right, #0A246A, #A6CAF0);
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Tahoma', sans-serif;
+    user-select: none;
+}
+
+.lightbox-close {
+    width: 20px;
+    height: 20px;
+    background: #ECE9D8;
+    border: 1px solid #0A246A;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Tahoma', sans-serif;
+}
+
+.lightbox-close:hover {
+    background: #d4d0c8;
+}
+
+.lightbox-image-container {
+    padding: 10px;
+    background: white;
+    margin: 3px;
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    min-height: 300px;
+}
+
+.lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: calc(90vh - 100px);
+    margin: 0 auto;
+    transform-origin: center;
+    cursor: move;
+}
+
+.lightbox-controls {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: #ECE9D8;
+    border-top: 1px solid #999;
+}
+
+.zoom-button {
+    padding: 4px 12px;
+    background: linear-gradient(to bottom, #FEFEFE, #E3E3E3);
+    border: 1px solid #919B9C;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+    min-width: 30px;
+}
+
+.zoom-button:hover {
+    background: linear-gradient(to bottom, #E3E3E3, #FEFEFE);
+}
+
+.zoom-button:active {
+    background: #d4d0c8;
+}
+
+/* Make screenshots clickable */
+.screenshot {
+    cursor: pointer;
+}
+
+.screenshot:hover {
+    opacity: 0.9;
 } 

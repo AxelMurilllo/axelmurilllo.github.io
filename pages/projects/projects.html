@@ -32,6 +32,26 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Instructions Box -->
+                <div class="nav">
+                    <div class="box" style="border-radius: 10px 0px 0px 10px; margin-top: 20px;">
+                        <div class="content scroll" style="max-height: 550px;">
+                            <button>INSTRUCTIONS</button>
+                            <br>
+                            <div class="instruction-text">
+                                <p>Welcome to my projects page! This interface mimics a classic desktop environment.</p>
+                                <ul>
+                                    <li>Double-click on project icons to open them</li>
+                                    <li>Drag windows by their title bars</li>
+                                    <li>Resize windows using the bottom-right corner</li>
+                                    <li>Use window controls to minimize, maximize, or close</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </aside>
 
             <main>
@@ -69,13 +89,65 @@
                             <img src="../../images/project-images/marginlia-magic.PNG" alt="Marginalia Magic" class="project-preview">
                             <div class="project-info">
                                 <div class="project-title">Marginalia Magic</div>
-                                <div class="project-description">A web application for adding and managing annotations in digital texts.</div>
-                                <div class="project-tech">Technologies: React • Node.js • MongoDB</div>
+                                <div class="project-description">
+                                    <h3>Project Overview</h3>
+                                    <p>A modern React-based editor for Melville's Marginalia Online (MMO), replacing their outdated Adobe Flash/Flex markup editor. This tool helps catalog Herman Melville's personal library by converting his handwritten notes and markings into a machine-readable digital format.</p>
+                                    
+                                    <h3>Key Features</h3>
+                                    <ul>
+                                        <li>Document loading and management from MMO database</li>
+                                        <li>Page-by-page navigation and annotation</li>
+                                        <li>Interactive bounding box creation for text/image annotations</li>
+                                        <li>XML export functionality for offline use</li>
+                                        <li>Modern, intuitive user interface</li>
+                                    </ul>
+
+                                    <h3>Impact</h3>
+                                    <p>This project ensures MMO remains a sustainable and accessible resource for scholars, researchers, and literary enthusiasts interested in understanding Melville's annotations and creative process. The modernized interface and improved functionality contribute to the long-term preservation of Melville's literary annotations in a sustainable digital format.</p>
+
+                                    <h3>Screenshots</h3>
+                                    <div class="screenshot-viewer">
+                                        <div class="screenshot-tabs">
+                                            <button class="tab-button active" data-tab="main">Main Editor</button>
+                                            <button class="tab-button" data-tab="dropdown">Document Selection</button>
+                                            <button class="tab-button" data-tab="xml">XML View</button>
+                                        </div>
+                                        <div class="screenshot-container">
+                                            <div class="screenshot-frame">
+                                                <img src="../../images/marginalia-magic-images/main_page.png" alt="Main Editor Interface" class="screenshot active" id="main">
+                                                <img src="../../images/marginalia-magic-images/drop_down.png" alt="Document Selection Interface" class="screenshot" id="dropdown">
+                                                <img src="../../images/marginalia-magic-images/wordlevel_xml.PNG" alt="XML View Interface" class="screenshot" id="xml">
+                                            </div>
+                                            <div class="screenshot-description">
+                                                Click tabs above to view different aspects of the application
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-tech">Technologies: React • Node.js • XML • Image Processing</div>
                             </div>
                         </div>
                     </div>
                     <div class="window-status">Ready</div>
                     <div class="resize-handle bottom-right"></div>
+                </div>
+
+                <!-- Lightbox Image Viewer -->
+                <div id="image-lightbox" class="lightbox">
+                    <div class="lightbox-content">
+                        <div class="lightbox-header">
+                            <span class="lightbox-title">Image Viewer</span>
+                            <div class="lightbox-close">×</div>
+                        </div>
+                        <div class="lightbox-image-container">
+                            <img src="" alt="" class="lightbox-image">
+                        </div>
+                        <div class="lightbox-controls">
+                            <button class="zoom-button" data-zoom="out">-</button>
+                            <button class="zoom-button" data-zoom="reset">Reset</button>
+                            <button class="zoom-button" data-zoom="in">+</button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

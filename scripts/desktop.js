@@ -312,4 +312,140 @@ class DesktopManager {
 // Initialize desktop functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new DesktopManager();
+});
+
+// Screenshot tab functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const screenshots = document.querySelectorAll('.screenshot');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and screenshots
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            screenshots.forEach(screenshot => screenshot.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding screenshot
+            button.classList.add('active');
+            const targetId = button.getAttribute('data-tab');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+});
+
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const closeButton = lightbox.querySelector('.lightbox-close');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    let currentZoom = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    // Open lightbox when clicking on a screenshot
+    document.querySelectorAll('.screenshot').forEach(screenshot => {
+        screenshot.addEventListener('click', () => {
+            lightbox.classList.add('active');
+            lightboxImage.src = screenshot.src;
+            lightboxImage.alt = screenshot.alt;
+            lightboxTitle.textContent = screenshot.alt;
+            resetZoom();
+        });
+    });
+
+    // Close lightbox
+    closeButton.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    // Zoom controls
+    document.querySelectorAll('.zoom-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const action = button.getAttribute('data-zoom');
+            switch(action) {
+                case 'in':
+                    currentZoom = Math.min(currentZoom * 1.2, 3);
+                    break;
+                case 'out':
+                    currentZoom = Math.max(currentZoom / 1.2, 0.5);
+                    break;
+                case 'reset':
+                    resetZoom();
+                    break;
+            }
+            updateImageTransform();
+        });
+    });
+
+    // Image dragging
+    lightboxImage.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Prevent default drag behavior
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        lightboxImage.style.cursor = 'grabbing';
+    });
+
+    lightboxImage.addEventListener('dragstart', (e) => {
+        e.preventDefault(); // Prevent browser's native drag
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        // Calculate new position
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        
+        // Apply transform immediately for smooth movement
+        requestAnimationFrame(() => {
+            updateImageTransform();
+        });
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        lightboxImage.style.cursor = 'move';
+    });
+
+    // Also stop dragging if mouse leaves the window
+    document.addEventListener('mouseleave', () => {
+        if (isDragging) {
+            isDragging = false;
+            lightboxImage.style.cursor = 'move';
+        }
+    });
+
+    // Reset zoom and position
+    function resetZoom() {
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateImageTransform();
+    }
+
+    // Update image transform with hardware acceleration
+    function updateImageTransform() {
+        lightboxImage.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${currentZoom})`;
+    }
+
+    // Prevent zoom on mouse wheel
+    lightbox.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? 0.9 : 1.1;
+            currentZoom = Math.max(0.5, Math.min(currentZoom * delta, 3));
+            updateImageTransform();
+        }
+    }, { passive: false });
 }); 
