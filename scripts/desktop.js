@@ -169,9 +169,16 @@ class DesktopManager {
 
             window.addEventListener('mousedown', () => this.bringToFront(window));
 
-            const closeBtn = window.querySelector('.window-button:last-child');
-            if (closeBtn) {
-                closeBtn.onclick = () => this.closeProject(window.id.replace('-window', ''));
+            // Window control buttons
+            const buttons = window.querySelectorAll('.window-button');
+            buttons[0].onclick = () => this.minimizeWindow(window); // Minimize
+            buttons[1].onclick = () => this.maximizeWindow(window); // Maximize
+            buttons[2].onclick = () => this.closeProject(window.id.replace('-window', '')); // Close
+
+            // Window resizing
+            const resizeHandle = window.querySelector('.resize-handle');
+            if (resizeHandle) {
+                resizeHandle.addEventListener('mousedown', (e) => this.startResize(e, window));
             }
         });
     }
@@ -199,20 +206,101 @@ class DesktopManager {
     dragWindowMouseDown(e, window, state) {
         e.preventDefault();
         this.bringToFront(window);
+        
+        // Add dragging class to disable transitions
+        window.classList.add('dragging');
+        
+        // Get initial positions
         state.pos3 = e.clientX;
         state.pos4 = e.clientY;
-        document.onmouseup = () => this.closeWindowDragElement(window);
+        state.initialTop = window.offsetTop;
+        state.initialLeft = window.offsetLeft;
+        
+        document.onmouseup = () => {
+            window.classList.remove('dragging');
+            this.closeWindowDragElement(window);
+        };
+        
         document.onmousemove = (e) => this.elementWindowDrag(e, window, state);
+    }
+
+    minimizeWindow(window) {
+        window.style.display = 'none';
+    }
+
+    maximizeWindow(window) {
+        const desktop = document.querySelector('.desktop-grid');
+        const desktopRect = desktop.getBoundingClientRect();
+        
+        // Store original position and size if not already stored
+        if (!window.dataset.originalTop) {
+            window.dataset.originalTop = window.style.top;
+            window.dataset.originalLeft = window.style.left;
+            window.dataset.originalWidth = window.style.width;
+            window.dataset.originalHeight = window.style.height;
+        }
+
+        // Toggle between maximized and original state
+        if (window.classList.contains('maximized')) {
+            window.classList.remove('maximized');
+            window.style.top = window.dataset.originalTop;
+            window.style.left = window.dataset.originalLeft;
+            window.style.width = window.dataset.originalWidth;
+            window.style.height = window.dataset.originalHeight;
+        } else {
+            window.classList.add('maximized');
+            window.style.top = '0';
+            window.style.left = '0';
+            window.style.width = `${desktopRect.width}px`;
+            window.style.height = `${desktopRect.height}px`;
+        }
+    }
+
+    startResize(e, window) {
+        e.preventDefault();
+        
+        // Add resizing class to disable transitions
+        window.classList.add('resizing');
+        
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = window.offsetWidth;
+        const startHeight = window.offsetHeight;
+        const startLeft = window.offsetLeft;
+        const startTop = window.offsetTop;
+
+        const resize = (e) => {
+            e.preventDefault();
+            
+            // Calculate new dimensions
+            const width = startWidth + (e.clientX - startX);
+            const height = startHeight + (e.clientY - startY);
+            
+            // Apply minimum dimensions
+            window.style.width = `${Math.max(400, width)}px`;
+            window.style.height = `${Math.max(300, height)}px`;
+        };
+
+        const stopResize = () => {
+            window.classList.remove('resizing');
+            document.removeEventListener('mousemove', resize);
+            document.removeEventListener('mouseup', stopResize);
+        };
+
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', stopResize);
     }
 
     elementWindowDrag(e, window, state) {
         e.preventDefault();
-        state.pos1 = state.pos3 - e.clientX;
-        state.pos2 = state.pos4 - e.clientY;
-        state.pos3 = e.clientX;
-        state.pos4 = e.clientY;
-        window.style.top = (window.offsetTop - state.pos2) + "px";
-        window.style.left = (window.offsetLeft - state.pos1) + "px";
+        
+        // Calculate the distance moved
+        const deltaX = e.clientX - state.pos3;
+        const deltaY = e.clientY - state.pos4;
+        
+        // Update the window position directly
+        window.style.top = `${state.initialTop + deltaY}px`;
+        window.style.left = `${state.initialLeft + deltaX}px`;
     }
 
     closeWindowDragElement(window) {
