@@ -51,6 +51,7 @@ main {
     z-index: 1;
     min-height: 100%;
     min-width: 100%;
+    pointer-events: none;
 }
 
 .desktop-icon {
@@ -67,6 +68,7 @@ main {
     user-select: none;
     transition: transform 0.1s ease;
     background-color: transparent;
+    pointer-events: auto;
 }
 
 .desktop-icon.dragging {
@@ -117,7 +119,7 @@ main {
 
 /* Project Window Styles */
 .project-window {
-    position: absolute; 
+    position: fixed;
     background: #ECE9D8;
     border: 3px solid #0055EA;
     border-radius: 7px 7px 5px 5px;
@@ -130,12 +132,14 @@ main {
     max-width: 100vw;
     max-height: 100vh;
     z-index: 100;
-    transition: all 0.2s ease;
+    transition: none;
+    will-change: transform;
 }
 
-.project-window.dragging,
-.project-window.resizing {
-    transition: none;
+.project-window.dragging {
+    transition: none !important;
+    pointer-events: auto !important;
+    user-select: none;
 }
 
 .project-window.maximized {

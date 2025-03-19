@@ -1,14 +1,27 @@
-// Desktop functionality for projects page
+/**
+ * Manages the desktop-like interface functionality including window management,
+ * icon dragging, and grid positioning
+ */
 class DesktopManager {
+    /**
+     * Constructor
+     */
     constructor() {
-        this.gridSize = 100;
-        this.gridGap = 10;   
-        this.occupiedCells = new Map();
+        this.gridSize = 100;  // Size of each grid cell 
+        this.gridGap = 10;    // Gap between grid cells
+        this.occupiedCells = new Map();  // Know which grid cells are occupied
+        
+        // Initialize desktop functionality
         this.initializeIcons();
         this.initializeWindows();
-        this.updateOccupiedCells(); 
+        this.updateOccupiedCells();
     }
 
+    /**
+     * Sets up icon functions
+     * Drag and drop
+     * Double click
+     */
     initializeIcons() {
         document.querySelectorAll('.desktop-icon').forEach(icon => {
             let isDragging = false;
@@ -17,15 +30,13 @@ class DesktopManager {
 
             // Left click to drag icons
             icon.addEventListener('mousedown', (e) => {
-                if (e.button !== 0) return; 
+                if (e.button !== 0) return;  
                 isDragging = true;
                 icon.classList.add('dragging');
 
-                // Get initial positions
+                // Initial mouse/icon position
                 startX = e.clientX;
                 startY = e.clientY;
-
-                // Get icons current position relative to desktop grid
                 const rect = icon.getBoundingClientRect();
                 const desktop = document.querySelector('.desktop-grid').getBoundingClientRect();
                 
@@ -37,9 +48,11 @@ class DesktopManager {
                 // this.createHighlightCell();
             });
 
+            // Track mouse movement while dragging
             document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
 
+                // Calculate new position based on mouse movement
                 const deltaX = e.clientX - startX;
                 const deltaY = e.clientY - startY;
 
@@ -47,7 +60,7 @@ class DesktopManager {
                 const newX = originalX + deltaX;
                 const newY = originalY + deltaY;
 
-                // Get grid position
+                // Get nearest grid position
                 const gridPos = this.getGridPosition(newX + this.gridSize/2, newY + this.gridSize/2);
                 
                 // DEBUGGING: Update cells for user
@@ -57,25 +70,26 @@ class DesktopManager {
                 icon.style.top = `${newY}px`;
             });
 
+            // Drop the icons
             document.addEventListener('mouseup', () => {
                 if (!isDragging) return;
                 isDragging = false;
                 icon.classList.remove('dragging');
 
-                // Get current position
+                // Get final pos and snap to grid
                 const rect = icon.getBoundingClientRect();
                 const finalPos = this.getGridPosition(rect.left + this.gridSize/2, rect.top + this.gridSize/2);
                 
-                // Check if new position is occupied
+                // Check if target pos is already occupied
                 const newCellKey = `${finalPos.x},${finalPos.y}`;
                 const occupyingIcon = this.occupiedCells.get(newCellKey);
                 
                 if (!occupyingIcon || occupyingIcon === icon) {
-                    // Position is free
+                    // Pos is free
                     const x = finalPos.x * (this.gridSize + this.gridGap);
                     const y = finalPos.y * (this.gridSize + this.gridGap);
                     
-                    // Transitions for snapping into position
+                    // Transition for smoothing snap
                     icon.style.transition = 'left 0.1s, top 0.1s';
                     icon.style.left = `${x}px`;
                     icon.style.top = `${y}px`;
@@ -93,7 +107,6 @@ class DesktopManager {
                     icon.style.left = `${originalX}px`;
                     icon.style.top = `${originalY}px`;
                     
-                    // Removing 'rubberbanding' effect
                     setTimeout(() => {
                         icon.style.transition = '';
                     }, 200);
@@ -111,17 +124,23 @@ class DesktopManager {
         });
     }
 
+    /**
+     * Calculates the nearest grid position for given coordinates.
+     * @param {number} x - X coordinate
+     * @param {number} y - Y coordinate
+     * @returns {Object} Grid position {x, y}
+     */
     getGridPosition(x, y) {
         const desktop = document.querySelector('.desktop-grid');
         const rect = desktop.getBoundingClientRect();
         const relativeX = x - rect.left;
         const relativeY = y - rect.top;
 
-        // Calculate grid position
+        // Calculate grid cell position
         const gridX = Math.floor(relativeX / (this.gridSize + this.gridGap));
         const gridY = Math.floor(relativeY / (this.gridSize + this.gridGap));
 
-        // Ensure within bounds
+        // Ensure pos is within bounds
         const maxX = Math.floor(rect.width / (this.gridSize + this.gridGap)) - 1;
         const maxY = Math.floor(rect.height / (this.gridSize + this.gridGap)) - 1;
 
@@ -131,6 +150,9 @@ class DesktopManager {
         };
     }
 
+    /**
+     * Updates the map of occupied grid cells based on current icon positions
+     */
     updateOccupiedCells() {
         this.occupiedCells.clear();
         document.querySelectorAll('.desktop-icon').forEach(icon => {
@@ -165,17 +187,21 @@ class DesktopManager {
     initializeWindows() {
         document.querySelectorAll('.project-window').forEach(window => {
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-            window.querySelector('.window-titlebar').onmousedown = (e) => this.dragWindowMouseDown(e, window, { pos1, pos2, pos3, pos4 });
+            
+            // Set up window titlebar drag
+            window.querySelector('.window-titlebar').onmousedown = (e) => 
+                this.dragWindowMouseDown(e, window, { pos1, pos2, pos3, pos4 });
 
+            // Bring window to front when clicked (cannot get stuck 'behind' other windows/elements)
             window.addEventListener('mousedown', () => this.bringToFront(window));
 
-            // Window control buttons
+            // Set up window control buttons (minimize, maximize, close)
             const buttons = window.querySelectorAll('.window-button');
-            buttons[0].onclick = () => this.minimizeWindow(window); // Minimize
-            buttons[1].onclick = () => this.maximizeWindow(window); // Maximize
-            buttons[2].onclick = () => this.closeProject(window.id.replace('-window', '')); // Close
+            buttons[0].onclick = () => this.minimizeWindow(window);
+            buttons[1].onclick = () => this.maximizeWindow(window);
+            buttons[2].onclick = () => this.closeProject(window.id.replace('-window', ''));
 
-            // Window resizing
+            // Set up resize handle (bottom right corner)
             const resizeHandle = window.querySelector('.resize-handle');
             if (resizeHandle) {
                 resizeHandle.addEventListener('mousedown', (e) => this.startResize(e, window));
@@ -183,16 +209,28 @@ class DesktopManager {
         });
     }
 
+    /**
+     * Opens a project window and brings it to the front.
+     * @param {string} id - Project id
+     */
     openProject(id) {
         const window = document.getElementById(`${id}-window`);
         window.style.display = 'block';
         this.bringToFront(window);
     }
 
+    /**
+     * Closes a project window.
+     * @param {string} id - Project id
+     */
     closeProject(id) {
         document.getElementById(`${id}-window`).style.display = 'none';
     }
 
+    /**
+     * Brings a window to the front by updating its z-index.
+     * @param {HTMLElement} window - Window element to bring to front
+     */
     bringToFront(window) {
         const windows = document.querySelectorAll('.project-window');
         let maxZ = 0;
@@ -203,14 +241,19 @@ class DesktopManager {
         window.style.zIndex = maxZ + 1;
     }
 
+    /**
+     * Initializes window dragging functionality.
+     * @param {Event} e - Mouse event
+     * @param {HTMLElement} window - Window element
+     * @param {Object} state - Drag state object
+     */
     dragWindowMouseDown(e, window, state) {
         e.preventDefault();
         this.bringToFront(window);
         
-        // Add dragging class to disable transitions
         window.classList.add('dragging');
         
-        // Get initial positions
+        // Store initial positions
         state.pos3 = e.clientX;
         state.pos4 = e.clientY;
         state.initialTop = window.offsetTop;
@@ -224,15 +267,23 @@ class DesktopManager {
         document.onmousemove = (e) => this.elementWindowDrag(e, window, state);
     }
 
+    /**
+     * Handles window minimization.
+     * @param {HTMLElement} window - Window to minimize
+     */
     minimizeWindow(window) {
         window.style.display = 'none';
     }
 
+    /**
+     * Toggles window maximization state.
+     * @param {HTMLElement} window - Window to maximize/restore
+     */
     maximizeWindow(window) {
         const desktop = document.querySelector('.desktop-grid');
         const desktopRect = desktop.getBoundingClientRect();
         
-        // Store original position and size if not already stored
+        // Store original size if not already stored
         if (!window.dataset.originalTop) {
             window.dataset.originalTop = window.style.top;
             window.dataset.originalLeft = window.style.left;
@@ -240,7 +291,7 @@ class DesktopManager {
             window.dataset.originalHeight = window.style.height;
         }
 
-        // Toggle between maximized and original state
+        // Toggle maximized state
         if (window.classList.contains('maximized')) {
             window.classList.remove('maximized');
             window.style.top = window.dataset.originalTop;
@@ -256,23 +307,22 @@ class DesktopManager {
         }
     }
 
+    /**
+     * Initializes window resizing functionality.
+     * @param {Event} e - Mouse event
+     * @param {HTMLElement} window - Window to resize
+     */
     startResize(e, window) {
         e.preventDefault();
-        
-        // Add resizing class to disable transitions
         window.classList.add('resizing');
         
         const startX = e.clientX;
         const startY = e.clientY;
         const startWidth = window.offsetWidth;
         const startHeight = window.offsetHeight;
-        const startLeft = window.offsetLeft;
-        const startTop = window.offsetTop;
 
         const resize = (e) => {
             e.preventDefault();
-            
-            // Calculate new dimensions
             const width = startWidth + (e.clientX - startX);
             const height = startHeight + (e.clientY - startY);
             
@@ -291,6 +341,12 @@ class DesktopManager {
         document.addEventListener('mouseup', stopResize);
     }
 
+    /**
+     * Handles window dragging movement.
+     * @param {Event} e - Mouse event
+     * @param {HTMLElement} window - Window being dragged
+     * @param {Object} state - Drag state object
+     */
     elementWindowDrag(e, window, state) {
         e.preventDefault();
         
@@ -298,14 +354,22 @@ class DesktopManager {
         const deltaX = e.clientX - state.pos3;
         const deltaY = e.clientY - state.pos4;
         
-        // Update the window position directly
-        window.style.top = `${state.initialTop + deltaY}px`;
-        window.style.left = `${state.initialLeft + deltaX}px`;
+        const newTop = state.initialTop + deltaY;
+        const newLeft = state.initialLeft + deltaX;
+        
+        window.style.transform = 'none';
+        window.style.top = `${newTop}px`;
+        window.style.left = `${newLeft}px`;
     }
 
+    /**
+     * Cleans up window dragging event listeners.
+     * @param {HTMLElement} window - Window element
+     */
     closeWindowDragElement(window) {
         document.onmouseup = null;
         document.onmousemove = null;
+        window.style.transform = 'none';
     }
 }
 
@@ -387,7 +451,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Image dragging
     lightboxImage.addEventListener('mousedown', (e) => {
-        e.preventDefault(); // Prevent default drag behavior
+        // Ensure image cannot be dragged (default browser thing)
+        e.preventDefault(); 
         isDragging = true;
         startX = e.clientX - translateX;
         startY = e.clientY - translateY;
@@ -395,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     lightboxImage.addEventListener('dragstart', (e) => {
-        e.preventDefault(); // Prevent browser's native drag
+        e.preventDefault(); 
     });
 
     document.addEventListener('mousemove', (e) => {
