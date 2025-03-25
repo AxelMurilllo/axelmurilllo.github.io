@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="dynamic-head"></head>
+<script>
+    fetch("../includes/head.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("dynamic-head").innerHTML = data);
+</script>
+
+<body>
+    <div class="wrapper">
+        <div id="flex">
+            <aside class="left">
+                <div class="nav">
+                    <div class="box" style="border-radius: 10px 0px 0px 10px;">
+                        <div class="content scroll" style="max-height: 550px;">
+                            <!-- Navigation Sidebar -->
+                            <button>NAVIGATION</button>
+                            <br>
+                            <a href="../index.html">home</a>
+                            <a href="about.html">about</a>
+                            <a href="projects/projects.html">projects</a>
+                            <a href="blog.html">blog</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <main style="max-width: 800px; margin: 0 auto;">
+                <div>
+                    <!-- Header Box -->
+                    <div class="header">
+                        <div class="ht">blog posts</div>
+                    </div>
+                </div>
+                <!-- Blog Posts List -->
+                <div class="box">
+                    <div class="content">
+                        <div class="blog-list">
+                            <!-- Example blog post entry -->
+                            <div class="blog-entry">
+                                <h2><a href="blog/blog-post-1.html">Setting Up My Portfolio Website</a></h2>
+                                <div class="blog-meta">Posted on March 15, 2025</div>
+                                <p class="blog-preview">
+                                    In this post, I discuss the process of creating my portfolio website using HTML, CSS, and JavaScript,
+                                    and how I implemented the retro Windows-style interface.
+                                </p>
+                                <a href="blog/blog-post-1.html" class="read-more">Read More →</a>
+                            </div>
+                            <hr style="border: 1px solid #eee; margin: 20px 0;">
+                            <!-- Add more blog entries here as you write them -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        .blog-list {
+            padding: 20px;
+        }
+        
+        .blog-entry {
+            margin-bottom: 30px;
+        }
+        
+        .blog-entry h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .blog-entry h2 a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .blog-entry h2 a:hover {
+            color: #0066cc;
+        }
+        
+        .blog-meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .blog-preview {
+            color: #444;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Override the background only for main blog content */
+        main .box .content {
+            background: #f9f9f9;
+        }
+    </style>
+</body>
+
+</html> 

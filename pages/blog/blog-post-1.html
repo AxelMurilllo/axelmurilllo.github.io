@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="dynamic-head"></head>
+<script>
+    fetch("../../includes/head.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("dynamic-head").innerHTML = data);
+</script>
+
+<body>
+    <div class="wrapper">
+        <div id="flex">
+            <aside class="left">
+                <div class="nav">
+                    <div class="box" style="border-radius: 10px 0px 0px 10px;">
+                        <div class="content scroll" style="max-height: 550px;">
+                            <!-- Navigation Sidebar -->
+                            <button>NAVIGATION</button>
+                            <br>
+                            <a href="../../index.html">home</a>
+                            <a href="../about.html">about</a>
+                            <a href="../projects/projects.html">projects</a>
+                            <a href="../blog.html">blog</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <main style="max-width: 800px; margin: 0 auto;">
+                <div>
+                    <!-- Header Box -->
+                    <div class="header">
+                        <div class="ht">blog</div>
+                    </div>
+                </div>
+                <!-- Blog Post Content -->
+                <div class="box">
+                    <div class="content blog-post">
+                        <h1>Setting Up My Portfolio Website</h1>
+                        <div class="post-meta">Posted on March 15, 2025</div>
+                        
+                        <div class="post-content">
+                            <p>
+                                When I decided to create my portfolio website, I wanted something that would stand out
+                                and showcase not just my projects, but also my personality and attention to detail.
+                                I chose to do the Windows retro style because it looked y2k and I liked the aesthetic.
+                                I made this portfolio website in vanilla HTML, CSS, and JavaScript. In retrospect, I should have used React or
+                                some other framework to make the website more efficient and easier to maintain. The site is mostly a jumble 
+                                of hacked together code. It looks great to me though, and I am especially proud of the desktop icons and 
+                                projects page.
+                            </p>
+
+                            <h2>The Design Process</h2>
+                            <p>
+                                The first step was planning the layout and user experience. I had a few ideas in mind, but 
+                                after looking at some templates, I found that I did not like any of the minimalist ShadCN/DaisyUI 
+                                designs. They looked very generic and didn't inspire me much. I looked at old 2000s websites and liked
+                                the chaos and lack of consistency across the site. I did add flexbox rules to make this portfolio site
+                                look more cohesive.
+                            </p>
+
+                            <h2>The Code</h2>
+                            <p>
+                                This site is mostly HTML and CSS, so it is not 'real' programming. I did use JavaScript to make the 
+                                desktop icons work, and to make the site more interactive. Working on the desktop icons was a fun challenge,
+                                and I am proud of the results. 
+                            </p>
+                            <p>
+                                The desktop.js file implements the logic for the window management system through the following components:
+                            </p>
+                            <ul>
+                                <li><strong>Event Delegation:</strong> The script uses event bubbling to handle window interactions (dragging, resizing, minimizing) 
+                                through a central event listener on the desktop container, rather than attaching listeners to each window.</li>
+                                
+                                <li><strong>Window State Management:</strong> Each window's state (position, size, z-index) is tracked and updated dynamically. 
+                                The z-index stack ensures proper window layering when clicking between multiple windows.</li>
+                                
+                                <li><strong>Drag Implementation:</strong> Mouse events (mousedown, mousemove, mouseup) are used to implement dragging. 
+                                The script calculates offset positions and updates window coordinates in real-time.</li>
+                                
+                                <li><strong>Resize Functionality:</strong> A resize handle in the bottom-right corner triggers the resize mode. 
+                                The script maintains aspect ratios and minimum dimensions while allowing smooth resizing through mousemove events.</li>
+                                
+                                <li><strong>Window Controls:</strong> The minimize, maximize, and close buttons are implemented through DOM manipulation, 
+                                with state preservation for restore operations.</li>
+                            </ul>
+                            <p>
+                                The system uses CSS transforms for smooth animations (very important otherwise it looks laggy).
+                                All window states are managed in memory, allowing for complex interactions like dragging partially 
+                                off-screen windows or handling multiple overlapping windows efficiently.
+                            </p>
+                            <div class="post-navigation">
+                                <a href="../blog.html">← Back to Blog</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        .blog-post {
+            padding: 30px;
+        }
+        
+        .blog-post h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #333;
+        }
+        
+        .post-meta {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0 30px 0;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .post-content h2 {
+            margin: 30px 0 15px 0;
+            color: #333;
+        }
+        
+        .post-content p {
+            margin: 15px 0;
+        }
+        
+        .post-navigation {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .post-navigation a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .post-navigation a:hover {
+            text-decoration: underline;
+        }
+
+        /* Override the default content background for blog posts */
+        main .box .content {
+            background: #f9f9f9;
+        }
+    </style>
+</body>
+
+</html> 
